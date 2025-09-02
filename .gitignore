@@ -24,3 +24,4 @@ htmlcov/
 *~
 .pdm-python
 .python-version
+/.idea/

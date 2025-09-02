@@ -60,8 +60,6 @@ class AbstractGateway(
         WithIoManager.__init__(self, io=io, parent_io_handler=parent_io_handler)
 
     def setup(self) -> AbstractGateway:
-        self._validate_env_keys()
-
         if self.default_headers is None:
             self.default_headers = {}
 
