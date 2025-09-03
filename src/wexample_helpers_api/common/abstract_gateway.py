@@ -298,8 +298,8 @@ class AbstractGateway(
 
         if not is_quiet:
             self.io.debug(
-                message=f"{request_context.method} {request_context.url} -> {response.status_code}",
-                symbol="🌐"
+                message=f"{request_context.method} | {response.status_code} -> {request_context.url}",
+                symbol="🌍"
             )
 
         if response.status_code in request_context.expected_status_codes:
