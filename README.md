@@ -2,7 +2,7 @@
 
 Some python basic helpers for apis.
 
-Version: 0.0.30
+Version: 0.0.31
 
 ## Requirements
 
@@ -12,8 +12,8 @@ Version: 0.0.30
 
 - pydantic>=2,<3
 - requests
-- wexample-helpers==0.0.65
-- wexample-prompt==0.0.47
+- wexample-helpers==0.0.66
+- wexample-prompt==0.0.48
 
 ## Installation
 
