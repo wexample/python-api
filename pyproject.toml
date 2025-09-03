@@ -4,7 +4,7 @@ build-backend = "pdm.backend"
 
 [project]
 name = "wexample-helpers-api"
-version = "0.0.30"
+version = "0.0.31"
 description = "Some python basic helpers for apis."
 authors = [
     { name = "weeger", email = "contact@wexample.com" },
@@ -18,8 +18,8 @@ classifiers = [
 dependencies = [
     "pydantic>=2,<3",
     "requests",
-    "wexample-helpers==0.0.65",
-    "wexample-prompt==0.0.47",
+    "wexample-helpers==0.0.66",
+    "wexample-prompt==0.0.48",
 ]
 
 [project.readme]
