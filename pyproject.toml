@@ -42,7 +42,7 @@ distribution = true
 
 [tool.pdm.build]
 includes = [
-    "src/wexample_helpers_api/py.typed",
+    'src/wexample_helpers_api/*',
 ]
 package-dir = "src"
 
