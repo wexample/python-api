@@ -27,6 +27,7 @@ def gateway(io_manager, mock_env) -> DemoSimpleGateway:
 
 def create_mock_response(status_code=200, json_data=None) -> MagicMock:
     from unittest.mock import MagicMock
+
     from requests import Response
     mock_response = MagicMock(spec=Response)
     mock_response.status_code = status_code
