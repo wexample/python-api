@@ -1,13 +1,15 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
 from unittest.mock import patch
 
 import pytest
-from typing import TYPE_CHECKING
+
 if TYPE_CHECKING:
+    from unittest.mock import MagicMock
+
     from wexample_helpers_api.demo.demo_simple_gateway import DemoSimpleGateway
     from wexample_prompt.common.io_manager import IoManager
-    from unittest.mock import MagicMock
 
 
 @pytest.fixture

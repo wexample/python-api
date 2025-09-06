@@ -15,10 +15,9 @@ from wexample_prompt.common.io_manager import IoManager
 from wexample_prompt.mixins.with_io_manager import WithIoManager
 
 if TYPE_CHECKING:
-    pass
-    from wexample_helpers_api.enums.http import Header
-    from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
     from wexample_helpers.const.types import StringsList
+    from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
+    from wexample_helpers_api.enums.http import Header
 
 
 class AbstractGateway(
@@ -181,8 +180,8 @@ class AbstractGateway(
         raise_exceptions: bool = False,
     ) -> requests.Response | None:
         from wexample_helpers.errors.gateway_error import GatewayError
-        from wexample_helpers_api.enums.http import Header
         from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
+        from wexample_helpers_api.enums.http import Header
         payload = HttpRequestPayload.from_endpoint(
             base_url=self.get_base_url(),
             endpoint=endpoint,
