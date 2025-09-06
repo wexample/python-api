@@ -10,16 +10,15 @@ from wexample_helpers.classes.mixin.has_snake_short_class_name_class_mixin impor
     HasSnakeShortClassNameClassMixin,
 )
 from wexample_helpers.classes.mixin.has_two_steps_init import HasTwoStepInit
-from wexample_helpers.const.types import StringsList
-from wexample_helpers.errors.gateway_error import GatewayError
-from wexample_helpers.helpers.cli import cli_make_clickable_path
-from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
-from wexample_helpers_api.enums.http import ContentType, Header, HttpMethod
+from wexample_helpers_api.enums.http import ContentType, HttpMethod
 from wexample_prompt.common.io_manager import IoManager
 from wexample_prompt.mixins.with_io_manager import WithIoManager
 
 if TYPE_CHECKING:
     pass
+    from wexample_helpers_api.enums.http import Header
+    from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
+    from wexample_helpers.const.types import StringsList
 
 
 class AbstractGateway(
@@ -113,6 +112,7 @@ class AbstractGateway(
         self, request_context: HttpRequestPayload, status_code: int | None = None
     ) -> dict[str, Any]:
         """Create request details dictionary for logging."""
+        from wexample_helpers.helpers.cli import cli_make_clickable_path
         details: dict[str, Any] = {
             "URL": request_context.url,
             "Method": request_context.method,
@@ -180,6 +180,9 @@ class AbstractGateway(
         timeout: int | None = None,
         raise_exceptions: bool = False,
     ) -> requests.Response | None:
+        from wexample_helpers.errors.gateway_error import GatewayError
+        from wexample_helpers_api.enums.http import Header
+        from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
         payload = HttpRequestPayload.from_endpoint(
             base_url=self.get_base_url(),
             endpoint=endpoint,

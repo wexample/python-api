@@ -1,25 +1,31 @@
 from __future__ import annotations
 
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pytest
-from requests import Response
-from wexample_helpers_api.demo.demo_simple_gateway import DemoSimpleGateway
-from wexample_prompt.common.io_manager import IoManager
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from wexample_helpers_api.demo.demo_simple_gateway import DemoSimpleGateway
+    from wexample_prompt.common.io_manager import IoManager
+    from unittest.mock import MagicMock
 
 
 @pytest.fixture
 def io_manager() -> IoManager:
+    from wexample_prompt.common.io_manager import IoManager
     return IoManager()
 
 
 @pytest.fixture
 def gateway(io_manager, mock_env) -> DemoSimpleGateway:
     """Gateway fixture that depends on mock_env to ensure environment variables are set"""
+    from wexample_helpers_api.demo.demo_simple_gateway import DemoSimpleGateway
     return DemoSimpleGateway(base_url="https://api.example.com", io_manager=io_manager)
 
 
 def create_mock_response(status_code=200, json_data=None) -> MagicMock:
+    from unittest.mock import MagicMock
+    from requests import Response
     mock_response = MagicMock(spec=Response)
     mock_response.status_code = status_code
     mock_response.json.return_value = json_data or {}
