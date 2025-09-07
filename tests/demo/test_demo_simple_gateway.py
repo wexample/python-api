@@ -12,21 +12,6 @@ if TYPE_CHECKING:
     from wexample_prompt.common.io_manager import IoManager
 
 
-@pytest.fixture
-def io_manager() -> IoManager:
-    from wexample_prompt.common.io_manager import IoManager
-
-    return IoManager()
-
-
-@pytest.fixture
-def gateway(io_manager, mock_env) -> DemoSimpleGateway:
-    """Gateway fixture that depends on mock_env to ensure environment variables are set"""
-    from wexample_helpers_api.demo.demo_simple_gateway import DemoSimpleGateway
-
-    return DemoSimpleGateway(base_url="https://api.example.com", io_manager=io_manager)
-
-
 def create_mock_response(status_code=200, json_data=None) -> MagicMock:
     from unittest.mock import MagicMock
 
@@ -38,30 +23,23 @@ def create_mock_response(status_code=200, json_data=None) -> MagicMock:
     return mock_response
 
 
+@pytest.fixture
+def gateway(io_manager, mock_env) -> DemoSimpleGateway:
+    """Gateway fixture that depends on mock_env to ensure environment variables are set"""
+    from wexample_helpers_api.demo.demo_simple_gateway import DemoSimpleGateway
+
+    return DemoSimpleGateway(base_url="https://api.example.com", io_manager=io_manager)
+
+
+@pytest.fixture
+def io_manager() -> IoManager:
+    from wexample_prompt.common.io_manager import IoManager
+
+    return IoManager()
+
+
 def test_check_connection(gateway) -> None:
     assert gateway.check_connection() is True
-
-
-@patch("requests.request")
-def test_get_user_info(mock_request, gateway) -> None:
-    # Arrange
-    expected_data = {"id": 1, "name": "Test User"}
-    mock_request.return_value = create_mock_response(json_data=expected_data)
-    gateway.connected = True
-
-    # Act
-    result = gateway.get_user_info()
-
-    # Assert
-    assert result == expected_data
-    mock_request.assert_called_once_with(
-        method="GET",
-        url="https://api.example.com/user",
-        json=None,
-        params=None,
-        headers={},
-        timeout=30,
-    )
 
 
 @patch("requests.request")
@@ -80,30 +58,6 @@ def test_create_item(mock_request, gateway) -> None:
     mock_request.assert_called_once_with(
         method="POST",
         url="https://api.example.com/items",
-        json=item_data,
-        params=None,
-        headers={},
-        timeout=30,
-    )
-
-
-@patch("requests.request")
-def test_update_item(mock_request, gateway) -> None:
-    # Arrange
-    item_id = "123"
-    item_data = {"name": "Updated Item"}
-    expected_response = {"id": item_id, **item_data}
-    mock_request.return_value = create_mock_response(json_data=expected_response)
-    gateway.connected = True
-
-    # Act
-    result = gateway.update_item(item_id, item_data)
-
-    # Assert
-    assert result == expected_response
-    mock_request.assert_called_once_with(
-        method="PUT",
-        url=f"https://api.example.com/items/{item_id}",
         json=item_data,
         params=None,
         headers={},
@@ -132,6 +86,28 @@ def test_delete_item(mock_request, gateway) -> None:
     )
 
 
+@patch("requests.request")
+def test_get_user_info(mock_request, gateway) -> None:
+    # Arrange
+    expected_data = {"id": 1, "name": "Test User"}
+    mock_request.return_value = create_mock_response(json_data=expected_data)
+    gateway.connected = True
+
+    # Act
+    result = gateway.get_user_info()
+
+    # Assert
+    assert result == expected_data
+    mock_request.assert_called_once_with(
+        method="GET",
+        url="https://api.example.com/user",
+        json=None,
+        params=None,
+        headers={},
+        timeout=30,
+    )
+
+
 def test_not_connected_error(gateway) -> None:
     # Arrange
     gateway.connected = False
@@ -139,3 +115,27 @@ def test_not_connected_error(gateway) -> None:
     # Act & Assert
     with pytest.raises(AttributeError):
         gateway.get_user_info()
+
+
+@patch("requests.request")
+def test_update_item(mock_request, gateway) -> None:
+    # Arrange
+    item_id = "123"
+    item_data = {"name": "Updated Item"}
+    expected_response = {"id": item_id, **item_data}
+    mock_request.return_value = create_mock_response(json_data=expected_response)
+    gateway.connected = True
+
+    # Act
+    result = gateway.update_item(item_id, item_data)
+
+    # Assert
+    assert result == expected_response
+    mock_request.assert_called_once_with(
+        method="PUT",
+        url=f"https://api.example.com/items/{item_id}",
+        json=item_data,
+        params=None,
+        headers={},
+        timeout=30,
+    )
