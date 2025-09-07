@@ -10,6 +10,8 @@ Version: 0.0.32
 
 ## Dependencies
 
+- attrs>=23.1.0
+- cattrs>=23.1.0
 - pydantic>=2,<3
 - requests
 - wexample-helpers==0.0.67

@@ -180,8 +180,8 @@ class AbstractGateway(
         raise_exceptions: bool = False,
     ) -> requests.Response | None:
         from wexample_helpers.errors.gateway_error import GatewayError
-        from wexample_helpers_api.enums.http import Header
         from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
+        from wexample_helpers_api.enums.http import Header
         payload = HttpRequestPayload.from_endpoint(
             base_url=self.get_base_url(),
             endpoint=endpoint,
