@@ -7,13 +7,13 @@ from wexample_helpers_api.enums.http import HttpMethod
 
 
 class HttpRequestPayload(BaseModel):
-    url: str
-    method: HttpMethod = HttpMethod.GET
-    data: dict[str, Any] | bytes | None = None
-    query_params: dict[str, Any] | None = None
-    headers: dict[str, str] | None = None
     call_origin: str | None = None
+    data: dict[str, Any] | bytes | None = None
     expected_status_codes: list[int] = [200]
+    headers: dict[str, str] | None = None
+    method: HttpMethod = HttpMethod.GET
+    query_params: dict[str, Any] | None = None
+    url: str
 
     @classmethod
     def from_url(cls, url: str, call_origin: str | None = None) -> HttpRequestPayload:

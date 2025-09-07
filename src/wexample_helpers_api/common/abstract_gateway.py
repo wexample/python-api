@@ -28,25 +28,25 @@ class AbstractGateway(
 ):
     # Base configuration
     base_url: str | None = Field(default=None, description="Base API URL")
-    timeout: int = Field(default=30, description="Request timeout in seconds")
-    quiet: bool = Field(
-        default=False, description="If True, only show errors and warnings"
-    )
     # State
     connected: bool = Field(default=False, description="Connection state")
-    last_request_time: float | None = Field(
-        default=None, description="Timestamp of last request"
-    )
-    rate_limit_delay: float = Field(
-        default=1.0, description="Minimum delay between requests in seconds"
-    )
-    last_exception: Any = Field(
-        default=None, description="Last exception encountered during request"
-    )
     # Default request configuration
     default_headers: dict[str, str] = Field(
         default_factory=dict, description="Default headers for requests"
     )
+    last_exception: Any = Field(
+        default=None, description="Last exception encountered during request"
+    )
+    last_request_time: float | None = Field(
+        default=None, description="Timestamp of last request"
+    )
+    quiet: bool = Field(
+        default=False, description="If True, only show errors and warnings"
+    )
+    rate_limit_delay: float = Field(
+        default=1.0, description="Minimum delay between requests in seconds"
+    )
+    timeout: int = Field(default=30, description="Request timeout in seconds")
 
     def __init__(
         self,
