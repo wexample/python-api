@@ -112,6 +112,7 @@ class AbstractGateway(
     ) -> dict[str, Any]:
         """Create request details dictionary for logging."""
         from wexample_helpers.helpers.cli import cli_make_clickable_path
+
         details: dict[str, Any] = {
             "URL": request_context.url,
             "Method": request_context.method,
@@ -182,6 +183,7 @@ class AbstractGateway(
         from wexample_helpers.errors.gateway_error import GatewayError
         from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
         from wexample_helpers_api.enums.http import Header
+
         payload = HttpRequestPayload.from_endpoint(
             base_url=self.get_base_url(),
             endpoint=endpoint,
