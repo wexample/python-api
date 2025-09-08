@@ -9,7 +9,6 @@ from wexample_helpers_api.enums.http import HttpMethod
 
 class TestHttpRequestPayload(unittest.TestCase):
     """Test cases for HttpRequestPayload class."""
-
     def test_direct_instantiation(self) -> None:
         """Test direct instantiation of HttpRequestPayload."""
         from wexample_helpers_api.common.http_request_payload import HttpRequestPayload

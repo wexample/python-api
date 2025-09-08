@@ -7,7 +7,6 @@ from wexample_helpers_api.common.abstract_gateway import AbstractGateway
 
 class DemoSimpleGateway(AbstractGateway):
     """A simple implementation of AbstractGateway for demonstration purposes."""
-
     def check_connection(self) -> bool:
         # Always return True for demo purposes
         return True
