@@ -57,22 +57,9 @@ class AbstractGateway(
         BaseModel.__init__(self, **kwargs)
         WithIoManager.__init__(self, io=io, parent_io_handler=parent_io_handler)
 
-    def setup(self) -> AbstractGateway:
-        if self.default_headers is None:
-            self.default_headers = {}
-
-        return self
-
     @classmethod
     def get_class_name_suffix(cls) -> str | None:
         return "GatewayService"
-
-    def get_base_url(self) -> str | None:
-        return self.base_url
-
-    def connect(self) -> bool:
-        self.connected = True
-        return True
 
     def check_connexion(self) -> bool:
         return self.connected
@@ -85,52 +72,12 @@ class AbstractGateway(
             is not None
         )
 
-    def get_expected_env_keys(self) -> StringsList:
-        return []
+    def clear_error(self) -> None:
+        self.last_exception = None
 
-    def _handle_rate_limiting(self) -> None:
-        if self.last_request_time is not None:
-            elapsed = time.time() - self.last_request_time
-            if elapsed < self.rate_limit_delay:
-                time.sleep(self.rate_limit_delay - elapsed)
-        self.last_request_time = time.time()
-
-    def _extract_error_message(self, response: requests.Response) -> str:
-        """Extract error message from response."""
-        message = f"HTTP {response.status_code}"
-        try:
-            data = response.json()
-            if isinstance(data, dict):
-                message = data.get("message", data.get("error", message))
-        except (ValueError, AttributeError):
-            if response.text:
-                message = response.text
-        return message
-
-    def _create_request_details(
-        self, request_context: HttpRequestPayload, status_code: int | None = None
-    ) -> dict[str, Any]:
-        """Create request details dictionary for logging."""
-        from wexample_helpers.helpers.cli import cli_make_clickable_path
-
-        details: dict[str, Any] = {
-            "URL": request_context.url,
-            "Method": request_context.method,
-        }
-        if request_context.call_origin:
-            details["Call Origin"] = cli_make_clickable_path(
-                request_context.call_origin
-            )
-        if request_context.data:
-            if isinstance(request_context.data, bytes):
-                details["Data"] = f"<Binary data: {len(request_context.data)} bytes>"
-            else:
-                details["Data"] = request_context.data
-        if request_context.query_params:
-            details["Query Parameters"] = request_context.query_params
-        if status_code is not None:
-            details["Status"] = status_code
-        return details
+    def connect(self) -> bool:
+        self.connected = True
+        return True
 
     def format_response_content(self, response: requests.Response | None) -> str:
         """Extract and format response content for logging."""
@@ -142,27 +89,65 @@ class AbstractGateway(
         except (ValueError, AttributeError):
             return response.text
 
-    def _get_header_value(
+    def get_base_url(self) -> str | None:
+        return self.base_url
+
+    def get_expected_env_keys(self) -> StringsList:
+        return []
+
+    def get_last_error(self) -> Exception | None:
+        return self.last_exception
+
+    def handle_api_response(
         self,
-        headers: Mapping[str, str] | None,
-        name: Header,
-    ) -> str | None:
-        """
-        Case-insensitive lookup of a header followed by normalisation:
-        - keep only the part before the first ';'
-        - trim whitespace
-        - convert to lower-case
-        """
-        if not headers:
-            return None
-        raw = next(
-            (v for k, v in headers.items() if k.lower() == name.value.lower()),
-            None,
-        )
-        if raw is None:
+        response: requests.Response | None,
+        request_context: HttpRequestPayload,
+        exception: Exception | None = None,
+        fatal_on_error: bool = False,
+        quiet: bool | None = None,
+    ) -> requests.Response | None:
+        self.last_exception = exception
+        is_quiet = self.quiet if quiet is None else quiet
+
+        if response is None:
+            if not is_quiet:
+                self.io.properties(
+                    self._create_request_details(request_context),
+                    title="Request Details",
+                )
+            if exception:
+                self.io.error(str(exception), exception=exception, fatal=fatal_on_error)
             return None
 
-        return raw.split(";", 1)[0].strip().lower() or None
+        if not is_quiet:
+            self.io.debug(
+                message=f"{request_context.method} | {response.status_code} -> {request_context.url}",
+                symbol="🌍",
+            )
+
+        if response.status_code in request_context.expected_status_codes:
+            return response
+
+        # Combine request details with response content
+        details = {
+            **self._create_request_details(request_context, response.status_code),
+            "Response Content": self.format_response_content(response),
+        }
+
+        if not is_quiet:
+            self.io.properties(details, title="Request Details")
+
+        self.io.error(
+            message=(
+                str(exception) if exception else self._extract_error_message(response)
+            ),
+            exception=exception,
+            fatal=fatal_on_error,
+        )
+        return response
+
+    def has_error(self) -> bool:
+        return self.last_exception is not None
 
     def make_request(
         self,
@@ -269,59 +254,74 @@ class AbstractGateway(
             quiet=quiet,
         )
 
-    def has_error(self) -> bool:
-        return self.last_exception is not None
+    def setup(self) -> AbstractGateway:
+        if self.default_headers is None:
+            self.default_headers = {}
 
-    def get_last_error(self) -> Exception | None:
-        return self.last_exception
+        return self
 
-    def clear_error(self) -> None:
-        self.last_exception = None
+    def _create_request_details(
+        self, request_context: HttpRequestPayload, status_code: int | None = None
+    ) -> dict[str, Any]:
+        """Create request details dictionary for logging."""
+        from wexample_helpers.helpers.cli import cli_make_clickable_path
 
-    def handle_api_response(
+        details: dict[str, Any] = {
+            "URL": request_context.url,
+            "Method": request_context.method,
+        }
+        if request_context.call_origin:
+            details["Call Origin"] = cli_make_clickable_path(
+                request_context.call_origin
+            )
+        if request_context.data:
+            if isinstance(request_context.data, bytes):
+                details["Data"] = f"<Binary data: {len(request_context.data)} bytes>"
+            else:
+                details["Data"] = request_context.data
+        if request_context.query_params:
+            details["Query Parameters"] = request_context.query_params
+        if status_code is not None:
+            details["Status"] = status_code
+        return details
+
+    def _extract_error_message(self, response: requests.Response) -> str:
+        """Extract error message from response."""
+        message = f"HTTP {response.status_code}"
+        try:
+            data = response.json()
+            if isinstance(data, dict):
+                message = data.get("message", data.get("error", message))
+        except (ValueError, AttributeError):
+            if response.text:
+                message = response.text
+        return message
+
+    def _get_header_value(
         self,
-        response: requests.Response | None,
-        request_context: HttpRequestPayload,
-        exception: Exception | None = None,
-        fatal_on_error: bool = False,
-        quiet: bool | None = None,
-    ) -> requests.Response | None:
-        self.last_exception = exception
-        is_quiet = self.quiet if quiet is None else quiet
-
-        if response is None:
-            if not is_quiet:
-                self.io.properties(
-                    self._create_request_details(request_context),
-                    title="Request Details",
-                )
-            if exception:
-                self.io.error(str(exception), exception=exception, fatal=fatal_on_error)
+        headers: Mapping[str, str] | None,
+        name: Header,
+    ) -> str | None:
+        """
+        Case-insensitive lookup of a header followed by normalisation:
+        - keep only the part before the first ';'
+        - trim whitespace
+        - convert to lower-case
+        """
+        if not headers:
+            return None
+        raw = next(
+            (v for k, v in headers.items() if k.lower() == name.value.lower()),
+            None,
+        )
+        if raw is None:
             return None
 
-        if not is_quiet:
-            self.io.debug(
-                message=f"{request_context.method} | {response.status_code} -> {request_context.url}",
-                symbol="🌍",
-            )
+        return raw.split(";", 1)[0].strip().lower() or None
 
-        if response.status_code in request_context.expected_status_codes:
-            return response
-
-        # Combine request details with response content
-        details = {
-            **self._create_request_details(request_context, response.status_code),
-            "Response Content": self.format_response_content(response),
-        }
-
-        if not is_quiet:
-            self.io.properties(details, title="Request Details")
-
-        self.io.error(
-            message=(
-                str(exception) if exception else self._extract_error_message(response)
-            ),
-            exception=exception,
-            fatal=fatal_on_error,
-        )
-        return response
+    def _handle_rate_limiting(self) -> None:
+        if self.last_request_time is not None:
+            elapsed = time.time() - self.last_request_time
+            if elapsed < self.rate_limit_delay:
+                time.sleep(self.rate_limit_delay - elapsed)
+        self.last_request_time = time.time()

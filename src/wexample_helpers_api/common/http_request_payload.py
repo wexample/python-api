@@ -16,10 +16,6 @@ class HttpRequestPayload(BaseModel):
     url: str
 
     @classmethod
-    def from_url(cls, url: str, call_origin: str | None = None) -> HttpRequestPayload:
-        return cls(url=url, call_origin=call_origin)
-
-    @classmethod
     def from_endpoint(
         cls,
         base_url: str | None,
@@ -50,3 +46,7 @@ class HttpRequestPayload(BaseModel):
             call_origin=call_origin,
             expected_status_codes=expected_status_codes,
         )
+
+    @classmethod
+    def from_url(cls, url: str, call_origin: str | None = None) -> HttpRequestPayload:
+        return cls(url=url, call_origin=call_origin)

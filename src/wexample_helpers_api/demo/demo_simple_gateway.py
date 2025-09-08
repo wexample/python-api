@@ -12,15 +12,6 @@ class DemoSimpleGateway(AbstractGateway):
         # Always return True for demo purposes
         return True
 
-    def get_user_info(self) -> dict[str, Any]:
-        """Demo method to get user information."""
-        from wexample_helpers_api.enums.http import HttpMethod
-
-        response = self.make_request(
-            method=HttpMethod.GET, endpoint="/user", call_origin=__file__
-        )
-        return response.json()
-
     def create_item(self, item_data: dict[str, Any]) -> dict[str, Any]:
         """Demo method to create an item."""
         from wexample_helpers_api.enums.http import HttpMethod
@@ -30,6 +21,23 @@ class DemoSimpleGateway(AbstractGateway):
             endpoint="/items",
             data=item_data,
             call_origin=__file__,
+        )
+        return response.json()
+
+    def delete_item(self, item_id: str) -> None:
+        """Demo method to delete an item."""
+        from wexample_helpers_api.enums.http import HttpMethod
+
+        self.make_request(
+            method=HttpMethod.DELETE, endpoint=f"/items/{item_id}", call_origin=__file__
+        )
+
+    def get_user_info(self) -> dict[str, Any]:
+        """Demo method to get user information."""
+        from wexample_helpers_api.enums.http import HttpMethod
+
+        response = self.make_request(
+            method=HttpMethod.GET, endpoint="/user", call_origin=__file__
         )
         return response.json()
 
@@ -44,11 +52,3 @@ class DemoSimpleGateway(AbstractGateway):
             call_origin=__file__,
         )
         return response.json()
-
-    def delete_item(self, item_id: str) -> None:
-        """Demo method to delete an item."""
-        from wexample_helpers_api.enums.http import HttpMethod
-
-        self.make_request(
-            method=HttpMethod.DELETE, endpoint=f"/items/{item_id}", call_origin=__file__
-        )
