@@ -5,9 +5,8 @@ from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any
 
 import requests
-from wexample_helpers.classes.base_class import BaseClass
 from pydantic import BaseModel, Field
-
+from wexample_helpers.classes.base_class import BaseClass
 from wexample_helpers.classes.field import public_field
 from wexample_helpers.classes.mixin.has_snake_short_class_name_class_mixin import (
     HasSnakeShortClassNameClassMixin,

@@ -40,15 +40,15 @@ class HttpRequestPayload(BaseClass):
 
     @classmethod
     def from_endpoint(
-            cls,
-            base_url: str | None,
-            endpoint: str,
-            method: HttpMethod = HttpMethod.GET,
-            data: dict[str, Any] | bytes | None = None,
-            query_params: dict[str, Any] | None = None,
-            headers: dict[str, str] | None = None,
-            call_origin: str | None = None,
-            expected_status_codes: int | list[int] | None = None,
+        cls,
+        base_url: str | None,
+        endpoint: str,
+        method: HttpMethod = HttpMethod.GET,
+        data: dict[str, Any] | bytes | None = None,
+        query_params: dict[str, Any] | None = None,
+        headers: dict[str, str] | None = None,
+        call_origin: str | None = None,
+        expected_status_codes: int | list[int] | None = None,
     ) -> HttpRequestPayload:
         if base_url:
             url = f"{base_url.rstrip('/')}/{endpoint.lstrip('/')}"

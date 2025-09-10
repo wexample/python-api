@@ -26,6 +26,7 @@ def create_mock_response(status_code=200, json_data=None) -> MagicMock:
 @pytest.fixture
 def gateway(io_manager) -> DemoSimpleGateway:
     from wexample_helpers_api.demo.demo_simple_gateway import DemoSimpleGateway
+
     return DemoSimpleGateway(base_url="https://api.example.com", io=io_manager)
 
 
@@ -60,7 +61,7 @@ def test_create_item(mock_request, gateway) -> None:
         params=None,
         headers={},
         timeout=30,
-        stream=False
+        stream=False,
     )
 
 
@@ -82,7 +83,7 @@ def test_delete_item(mock_request, gateway) -> None:
         params=None,
         headers={},
         timeout=30,
-        stream=False
+        stream=False,
     )
 
 
@@ -105,7 +106,7 @@ def test_get_user_info(mock_request, gateway) -> None:
         params=None,
         headers={},
         timeout=30,
-        stream=False
+        stream=False,
     )
 
 
@@ -139,5 +140,5 @@ def test_update_item(mock_request, gateway) -> None:
         params=None,
         headers={},
         timeout=30,
-        stream=False
+        stream=False,
     )
