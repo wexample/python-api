@@ -2,30 +2,53 @@ from __future__ import annotations
 
 from typing import Any
 
-from pydantic import BaseModel
+from wexample_helpers.classes.base_class import BaseClass
+from wexample_helpers.classes.field import public_field
+from wexample_helpers.decorator.base_class import base_class
 from wexample_helpers_api.enums.http import HttpMethod
 
 
-class HttpRequestPayload(BaseModel):
-    call_origin: str | None = None
-    data: dict[str, Any] | bytes | None = None
-    expected_status_codes: list[int] = [200]
-    headers: dict[str, str] | None = None
-    method: HttpMethod = HttpMethod.GET
-    query_params: dict[str, Any] | None = None
-    url: str
+@base_class
+class HttpRequestPayload(BaseClass):
+    call_origin: str | None = public_field(
+        default=None,
+        description="Optional identifier of the request origin",
+    )
+    data: dict[str, Any] | bytes | None = public_field(
+        default=None,
+        description="Request body as a dictionary, raw bytes, or None",
+    )
+    expected_status_codes: list[int] = public_field(
+        factory=lambda: [200],
+        description="List of expected HTTP status codes considered successful",
+    )
+    headers: dict[str, str] | None = public_field(
+        default=None,
+        description="Optional HTTP headers for the request",
+    )
+    method: HttpMethod = public_field(
+        default=HttpMethod.GET,
+        description="HTTP method to use for the request",
+    )
+    query_params: dict[str, Any] | None = public_field(
+        default=None,
+        description="Optional query parameters to append to the URL",
+    )
+    url: str = public_field(
+        description="Target URL for the HTTP request",
+    )
 
     @classmethod
     def from_endpoint(
-        cls,
-        base_url: str | None,
-        endpoint: str,
-        method: HttpMethod = HttpMethod.GET,
-        data: dict[str, Any] | bytes | None = None,
-        query_params: dict[str, Any] | None = None,
-        headers: dict[str, str] | None = None,
-        call_origin: str | None = None,
-        expected_status_codes: int | list[int] | None = None,
+            cls,
+            base_url: str | None,
+            endpoint: str,
+            method: HttpMethod = HttpMethod.GET,
+            data: dict[str, Any] | bytes | None = None,
+            query_params: dict[str, Any] | None = None,
+            headers: dict[str, str] | None = None,
+            call_origin: str | None = None,
+            expected_status_codes: int | list[int] | None = None,
     ) -> HttpRequestPayload:
         if base_url:
             url = f"{base_url.rstrip('/')}/{endpoint.lstrip('/')}"

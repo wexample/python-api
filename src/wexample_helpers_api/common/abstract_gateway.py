@@ -5,7 +5,10 @@ from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any
 
 import requests
+from wexample_helpers.classes.base_class import BaseClass
 from pydantic import BaseModel, Field
+
+from wexample_helpers.classes.field import public_field
 from wexample_helpers.classes.mixin.has_snake_short_class_name_class_mixin import (
     HasSnakeShortClassNameClassMixin,
 )
@@ -19,43 +22,36 @@ if TYPE_CHECKING:
     from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
     from wexample_helpers_api.enums.http import Header
 
+from wexample_helpers.decorator.base_class import base_class
 
+
+@base_class
 class AbstractGateway(
     HasSnakeShortClassNameClassMixin,
     WithIoManager,
     HasTwoStepInit,
-    BaseModel,
 ):
     # Base configuration
-    base_url: str | None = Field(default=None, description="Base API URL")
+    base_url: str | None = public_field(default=None, description="Base API URL")
     # State
-    connected: bool = Field(default=False, description="Connection state")
+    connected: bool = public_field(default=False, description="Connection state")
     # Default request configuration
-    default_headers: dict[str, str] = Field(
-        default_factory=dict, description="Default headers for requests"
+    default_headers: dict[str, str] = public_field(
+        factory=dict, description="Default headers for requests"
     )
-    last_exception: Any = Field(
+    last_exception: Any = public_field(
         default=None, description="Last exception encountered during request"
     )
-    last_request_time: float | None = Field(
+    last_request_time: float | None = public_field(
         default=None, description="Timestamp of last request"
     )
-    quiet: bool = Field(
+    quiet: bool = public_field(
         default=False, description="If True, only show errors and warnings"
     )
-    rate_limit_delay: float = Field(
+    rate_limit_delay: float = public_field(
         default=1.0, description="Minimum delay between requests in seconds"
     )
-    timeout: int = Field(default=30, description="Request timeout in seconds")
-
-    def __init__(
-        self,
-        io: IoManager | None = None,
-        parent_io_handler: WithIoManager | None = None,
-        **kwargs,
-    ) -> None:
-        BaseModel.__init__(self, **kwargs)
-        WithIoManager.__init__(self, io=io, parent_io_handler=parent_io_handler)
+    timeout: int = public_field(default=30, description="Request timeout in seconds")
 
     @classmethod
     def get_class_name_suffix(cls) -> str | None:
