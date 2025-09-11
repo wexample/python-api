@@ -13,12 +13,11 @@ from wexample_helpers.classes.mixin.has_two_steps_init import HasTwoStepInit
 from wexample_helpers_api.enums.http import ContentType, HttpMethod
 from wexample_prompt.mixins.with_io_manager import WithIoManager
 
+from wexample_helpers.decorator.base_class import base_class
 if TYPE_CHECKING:
     from wexample_helpers.const.types import StringsList
     from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
     from wexample_helpers_api.enums.http import Header
-
-from wexample_helpers.decorator.base_class import base_class
 
 
 @base_class
