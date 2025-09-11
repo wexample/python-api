@@ -5,15 +5,12 @@ from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any
 
 import requests
-from pydantic import BaseModel, Field
-from wexample_helpers.classes.base_class import BaseClass
 from wexample_helpers.classes.field import public_field
 from wexample_helpers.classes.mixin.has_snake_short_class_name_class_mixin import (
     HasSnakeShortClassNameClassMixin,
 )
 from wexample_helpers.classes.mixin.has_two_steps_init import HasTwoStepInit
 from wexample_helpers_api.enums.http import ContentType, HttpMethod
-from wexample_prompt.common.io_manager import IoManager
 from wexample_prompt.mixins.with_io_manager import WithIoManager
 
 if TYPE_CHECKING:
