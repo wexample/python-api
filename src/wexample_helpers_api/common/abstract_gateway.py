@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from wexample_helpers.const.types import StringsList
     from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
     from wexample_helpers_api.enums.http import Header
+    from collections.abc import Mapping
 
 
 @base_class
