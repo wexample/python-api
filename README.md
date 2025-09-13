@@ -2,7 +2,7 @@
 
 Some python basic helpers for apis.
 
-Version: 0.0.32
+Version: 0.0.33
 
 ## Requirements
 
@@ -13,8 +13,8 @@ Version: 0.0.32
 - attrs>=23.1.0
 - cattrs>=23.1.0
 - requests
-- wexample-helpers==0.0.67
-- wexample-prompt==0.0.49
+- wexample-helpers==0.0.68
+- wexample-prompt==0.0.50
 
 ## Installation
 
