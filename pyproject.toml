@@ -19,7 +19,7 @@ dependencies = [
     "attrs>=23.1.0",
     "cattrs>=23.1.0",
     "requests",
-    "wexample-helpers==0.0.69",
+    "wexample-helpers==0.0.70",
     "wexample-prompt==0.0.51",
 ]
 
