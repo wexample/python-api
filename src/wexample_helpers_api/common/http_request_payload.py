@@ -18,9 +18,9 @@ class HttpRequestPayload(BaseClass):
         default=None,
         description="Request body as a dictionary, raw bytes, or None",
     )
-    expected_status_codes: list[int] = public_field(
-        factory=lambda: [200],
-        description="List of expected HTTP status codes considered successful",
+    expected_status_codes: list[int] | None = public_field(
+        default=None,
+        description="Optional list of expected HTTP status codes. If None, all responses are accepted.",
     )
     headers: dict[str, str] | None = public_field(
         default=None,
@@ -57,8 +57,6 @@ class HttpRequestPayload(BaseClass):
 
         if isinstance(expected_status_codes, int):
             expected_status_codes = [expected_status_codes]
-        elif expected_status_codes is None:
-            expected_status_codes = [200]
 
         return cls(
             url=url,

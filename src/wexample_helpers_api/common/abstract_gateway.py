@@ -118,6 +118,10 @@ class AbstractGateway(
                 symbol="🌍",
             )
 
+        # If no filtering is configured, accept all responses
+        if request_context.expected_status_codes is None:
+            return response
+        
         if response.status_code in request_context.expected_status_codes:
             return response
 
@@ -229,16 +233,19 @@ class AbstractGateway(
                 quiet=quiet,
             )
 
-        expected = (
-            {expected_status_codes}
-            if isinstance(expected_status_codes, int)
-            else set(expected_status_codes or {200})
-        )
+        # Only check status code if expected_status_codes is explicitly provided
         exception = None
-        if response.status_code not in expected:
-            exception = GatewayError(self._extract_error_message(response))
-            if raise_exceptions and exception:
-                raise exception
+        if expected_status_codes is not None:
+            expected = (
+                {expected_status_codes}
+                if isinstance(expected_status_codes, int)
+                else set(expected_status_codes)
+            )
+            if response.status_code not in expected:
+                exception = GatewayError(self._extract_error_message(response))
+                exception.response = response  # Attach response to exception for debugging
+                if raise_exceptions and exception:
+                    raise exception
 
         return self.handle_api_response(
             response=response,
