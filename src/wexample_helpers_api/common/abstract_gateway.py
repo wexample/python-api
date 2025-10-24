@@ -121,7 +121,7 @@ class AbstractGateway(
         # If no filtering is configured, accept all responses
         if request_context.expected_status_codes is None:
             return response
-        
+
         if response.status_code in request_context.expected_status_codes:
             return response
 
@@ -243,7 +243,9 @@ class AbstractGateway(
             )
             if response.status_code not in expected:
                 exception = GatewayError(self._extract_error_message(response))
-                exception.response = response  # Attach response to exception for debugging
+                exception.response = (
+                    response  # Attach response to exception for debugging
+                )
                 if raise_exceptions and exception:
                     raise exception
 
