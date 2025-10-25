@@ -11,13 +11,15 @@ from wexample_helpers.classes.mixin.has_snake_short_class_name_class_mixin impor
 )
 from wexample_helpers.classes.mixin.has_two_steps_init import HasTwoStepInit
 from wexample_helpers.decorator.base_class import base_class
-from wexample_helpers_api.enums.http import ContentType, HttpMethod
 from wexample_prompt.mixins.with_io_manager import WithIoManager
+
+from wexample_helpers_api.enums.http import ContentType, HttpMethod
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
 
     from wexample_helpers.const.types import StringsList
+
     from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
     from wexample_helpers_api.enums.http import Header
 
@@ -163,6 +165,7 @@ class AbstractGateway(
         raise_exceptions: bool = False,
     ) -> requests.Response | None:
         from wexample_helpers.errors.gateway_error import GatewayError
+
         from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
         from wexample_helpers_api.enums.http import Header
 
