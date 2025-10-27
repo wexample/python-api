@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import Any
 
 from wexample_helpers.decorator.base_class import base_class
-
 from wexample_helpers_api.common.abstract_gateway import AbstractGateway
 
 
