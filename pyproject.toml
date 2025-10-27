@@ -20,7 +20,7 @@ dependencies = [
     "cattrs>=23.1.0",
     "requests",
     "wexample-helpers==0.0.71",
-    "wexample-prompt==0.0.52",
+    "wexample-prompt==0.0.53",
 ]
 
 [project.readme]
@@ -36,6 +36,7 @@ homepage = "https://github.com/wexample/python-helpers-api"
 [project.optional-dependencies]
 dev = [
     "pytest",
+    "pytest-cov",
 ]
 
 [tool.pdm]
@@ -47,3 +48,7 @@ package-dir = "src"
 [[tool.pdm.build.packages]]
 include = "wexample_helpers_api"
 from = "src"
+
+[tool.setuptools.packages.find]
+include = ["*"]
+exclude = ["wexample_helpers_api.testing*"]
