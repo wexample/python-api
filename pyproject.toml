@@ -4,7 +4,7 @@ build-backend = "pdm.backend"
 
 [project]
 name = "wexample-helpers-api"
-version = "0.0.35"
+version = "0.0.36"
 description = "Some python basic helpers for apis."
 authors = [
     { name = "weeger", email = "contact@wexample.com" },
@@ -19,8 +19,8 @@ dependencies = [
     "attrs>=23.1.0",
     "cattrs>=23.1.0",
     "requests",
-    "wexample-helpers==0.0.71",
-    "wexample-prompt==0.0.53",
+    "wexample-helpers==0.0.72",
+    "wexample-prompt==0.0.54",
 ]
 
 [project.readme]
@@ -48,7 +48,6 @@ package-dir = "src"
 [[tool.pdm.build.packages]]
 include = "wexample_helpers_api"
 from = "src"
-
 [tool.setuptools.packages.find]
 include = ["*"]
 exclude = ["wexample_helpers_api.testing*"]
