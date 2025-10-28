@@ -5,7 +5,6 @@ from typing import Any
 from wexample_helpers.classes.base_class import BaseClass
 from wexample_helpers.classes.field import public_field
 from wexample_helpers.decorator.base_class import base_class
-
 from wexample_helpers_api.enums.http import HttpMethod
 
 

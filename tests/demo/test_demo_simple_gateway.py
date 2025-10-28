@@ -8,9 +8,8 @@ import pytest
 if TYPE_CHECKING:
     from unittest.mock import MagicMock
 
-    from wexample_prompt.common.io_manager import IoManager
-
     from wexample_helpers_api.demo.demo_simple_gateway import DemoSimpleGateway
+    from wexample_prompt.common.io_manager import IoManager
 
 
 def create_mock_response(status_code=200, json_data=None) -> MagicMock:
