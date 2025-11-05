@@ -3,7 +3,7 @@ requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
 [project]
-name = "wexample-helpers-api"
+name = "wexample-api"
 version = "0.0.71"
 description = "Some python basic helpers for apis."
 authors = [{name = "weeger", email = "contact@wexample.com"}]
@@ -25,7 +25,7 @@ content-type = "text/markdown"
 text = "MIT"
 
 [project.urls]
-homepage = "https://github.com/wexample/python-helpers-api"
+homepage = "https://github.com/wexample/python-api"
 
 [project.optional-dependencies]
 dev = [
