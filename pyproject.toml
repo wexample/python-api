@@ -33,6 +33,10 @@ dev = [
     "pytest-cov",
 ]
 
+[tool.setuptools.packages.find]
+include = ["*"]
+exclude = ["wexample_helpers_api.testing*"]
+
 [tool.pdm]
 distribution = true
 
@@ -42,6 +46,14 @@ package-dir = "src"
 [[tool.pdm.build.packages]]
 include = "wexample_helpers_api"
 from = "src"
-[tool.setuptools.packages.find]
-include = ["*"]
-exclude = ["wexample_helpers_api.testing*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.coverage.run]
+source = ["wexample_helpers_api"]
+omit = ["*/tests/*", "*/.venv/*", "*/venv/*"]
+
+[tool.coverage.report]
+exclude_lines = ["pragma: no cover", "def __repr__", "raise AssertionError", "raise NotImplementedError", "if __name__ == .__main__.:", "if TYPE_CHECKING:", "@abstractmethod"]
