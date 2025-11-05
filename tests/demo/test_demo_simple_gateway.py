@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 
     from wexample_prompt.common.io_manager import IoManager
 
-    from wexample_helpers_api.demo.demo_simple_gateway import DemoSimpleGateway
+    from wexample_api.demo.demo_simple_gateway import DemoSimpleGateway
 
 
 def create_mock_response(status_code=200, json_data=None) -> MagicMock:
@@ -26,7 +26,7 @@ def create_mock_response(status_code=200, json_data=None) -> MagicMock:
 
 @pytest.fixture
 def gateway(io_manager) -> DemoSimpleGateway:
-    from wexample_helpers_api.demo.demo_simple_gateway import DemoSimpleGateway
+    from wexample_api.demo.demo_simple_gateway import DemoSimpleGateway
 
     return DemoSimpleGateway(base_url="https://api.example.com", io=io_manager)
 

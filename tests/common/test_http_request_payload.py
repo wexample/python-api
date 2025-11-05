@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import unittest
 
-from wexample_helpers_api.enums.http import HttpMethod
+from wexample_api.enums.http import HttpMethod
 
 
 class TestHttpRequestPayload(unittest.TestCase):
@@ -12,7 +12,7 @@ class TestHttpRequestPayload(unittest.TestCase):
 
     def test_direct_instantiation(self) -> None:
         """Test direct instantiation of HttpRequestPayload."""
-        from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
+        from wexample_api.common.http_request_payload import HttpRequestPayload
 
         url = "https://api.example.com/endpoint"
         method = HttpMethod.PUT
@@ -36,7 +36,7 @@ class TestHttpRequestPayload(unittest.TestCase):
 
     def test_from_endpoint_basic(self) -> None:
         """Test creating HttpRequestPayload from endpoint with basic parameters."""
-        from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
+        from wexample_api.common.http_request_payload import HttpRequestPayload
 
         base_url = "https://api.example.com"
         endpoint = "/users"
@@ -50,7 +50,7 @@ class TestHttpRequestPayload(unittest.TestCase):
 
     def test_from_endpoint_with_all_parameters(self) -> None:
         """Test creating HttpRequestPayload with all optional parameters."""
-        from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
+        from wexample_api.common.http_request_payload import HttpRequestPayload
 
         base_url = "https://api.example.com"
         endpoint = "/users"
@@ -76,7 +76,7 @@ class TestHttpRequestPayload(unittest.TestCase):
 
     def test_from_endpoint_with_trailing_slash(self) -> None:
         """Test creating HttpRequestPayload with trailing slash in base_url."""
-        from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
+        from wexample_api.common.http_request_payload import HttpRequestPayload
 
         base_url = "https://api.example.com/"
         endpoint = "/users"
@@ -86,7 +86,7 @@ class TestHttpRequestPayload(unittest.TestCase):
 
     def test_from_endpoint_without_leading_slash(self) -> None:
         """Test creating HttpRequestPayload without leading slash in endpoint."""
-        from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
+        from wexample_api.common.http_request_payload import HttpRequestPayload
 
         base_url = "https://api.example.com"
         endpoint = "users"
@@ -96,7 +96,7 @@ class TestHttpRequestPayload(unittest.TestCase):
 
     def test_from_url(self) -> None:
         """Test creating HttpRequestPayload from URL."""
-        from wexample_helpers_api.common.http_request_payload import HttpRequestPayload
+        from wexample_api.common.http_request_payload import HttpRequestPayload
 
         url = "https://api.example.com/endpoint"
         payload = HttpRequestPayload.from_url(url)

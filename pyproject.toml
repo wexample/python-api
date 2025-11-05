@@ -35,7 +35,7 @@ dev = [
 
 [tool.setuptools.packages.find]
 include = ["*"]
-exclude = ["wexample_helpers_api.testing*"]
+exclude = ["wexample_api.testing*"]
 
 [tool.pdm]
 distribution = true
@@ -44,7 +44,7 @@ distribution = true
 package-dir = "src"
 
 [[tool.pdm.build.packages]]
-include = "wexample_helpers_api"
+include = "wexample_api"
 from = "src"
 
 [tool.pytest.ini_options]
@@ -52,7 +52,7 @@ testpaths = ["tests"]
 pythonpath = ["src"]
 
 [tool.coverage.run]
-source = ["wexample_helpers_api"]
+source = ["wexample_api"]
 omit = ["*/tests/*", "*/.venv/*", "*/venv/*"]
 
 [tool.coverage.report]
