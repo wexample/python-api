@@ -2,10 +2,12 @@ from __future__ import annotations
 
 from typing import Any
 
-from wexample_helpers_api.common.abstract_gateway import AbstractGateway
-from wexample_helpers_api.enums.http import HttpMethod
+from wexample_helpers.decorator.base_class import base_class
+
+from wexample_api.common.abstract_gateway import AbstractGateway
 
 
+@base_class
 class DemoSimpleGateway(AbstractGateway):
     """A simple implementation of AbstractGateway for demonstration purposes."""
 
@@ -13,15 +15,10 @@ class DemoSimpleGateway(AbstractGateway):
         # Always return True for demo purposes
         return True
 
-    def get_user_info(self) -> dict[str, Any]:
-        """Demo method to get user information."""
-        response = self.make_request(
-            method=HttpMethod.GET, endpoint="/user", call_origin=__file__
-        )
-        return response.json()
-
     def create_item(self, item_data: dict[str, Any]) -> dict[str, Any]:
         """Demo method to create an item."""
+        from wexample_api.enums.http import HttpMethod
+
         response = self.make_request(
             method=HttpMethod.POST,
             endpoint="/items",
@@ -30,8 +27,27 @@ class DemoSimpleGateway(AbstractGateway):
         )
         return response.json()
 
+    def delete_item(self, item_id: str) -> None:
+        """Demo method to delete an item."""
+        from wexample_api.enums.http import HttpMethod
+
+        self.make_request(
+            method=HttpMethod.DELETE, endpoint=f"/items/{item_id}", call_origin=__file__
+        )
+
+    def get_user_info(self) -> dict[str, Any]:
+        """Demo method to get user information."""
+        from wexample_api.enums.http import HttpMethod
+
+        response = self.make_request(
+            method=HttpMethod.GET, endpoint="/user", call_origin=__file__
+        )
+        return response.json()
+
     def update_item(self, item_id: str, item_data: dict[str, Any]) -> dict[str, Any]:
         """Demo method to update an item."""
+        from wexample_api.enums.http import HttpMethod
+
         response = self.make_request(
             method=HttpMethod.PUT,
             endpoint=f"/items/{item_id}",
@@ -39,9 +55,3 @@ class DemoSimpleGateway(AbstractGateway):
             call_origin=__file__,
         )
         return response.json()
-
-    def delete_item(self, item_id: str) -> None:
-        """Demo method to delete an item."""
-        self.make_request(
-            method=HttpMethod.DELETE, endpoint=f"/items/{item_id}", call_origin=__file__
-        )

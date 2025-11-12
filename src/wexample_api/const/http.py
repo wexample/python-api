@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from wexample_helpers_api.enums.http import HttpMethod
+from wexample_api.enums.http import HttpMethod
 
 HTTP_METHOD_MAP = {
     "GET": HttpMethod.GET,

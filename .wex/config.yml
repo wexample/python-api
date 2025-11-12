@@ -1,2 +1,3 @@
-name: helpers_api
-version: 0.0.29
+global:
+  name: api
+  version: 0.0.79
