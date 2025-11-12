@@ -1,6 +1,6 @@
 # wexample-api
 
-Version: 0.0.78
+Version: 0.0.79
 
 Some python basic helpers for apis.
 

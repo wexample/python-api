@@ -4,7 +4,7 @@ build-backend = "pdm.backend"
 
 [project]
 name = "wexample-api"
-version = "0.0.78"
+version = "0.0.79"
 description = "Some python basic helpers for apis."
 authors = [{name = "weeger", email = "contact@wexample.com"}]
 requires-python = ">=3.10"
