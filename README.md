@@ -119,7 +119,7 @@ Community support is available through GitHub Discussions.
 
 ## Contribution Guidelines
 
-We welcome contributions to the Wexample suite! 
+We welcome contributions to the Wexample suite!
 
 ### How to Contribute
 
@@ -137,7 +137,9 @@ See [CONTRIBUTORS.md](CONTRIBUTORS.md) for the full list of contributors.
 
 ## License
 
-MIT
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+Free to use in both personal and commercial projects.
 
 ## Useful Links
 
