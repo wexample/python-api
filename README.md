@@ -1,6 +1,6 @@
 # wexample-api
 
-Version: 0.0.80
+Version: 0.0.81
 
 Some python basic helpers for apis.
 
@@ -135,7 +135,7 @@ See the [project roadmap](https://github.com/wexample/python-api/issues) for upc
 
 ### Reporting Vulnerabilities
 
-If you discover a security vulnerability, please email security@wexample.com.
+If you discover a security vulnerability, please email contact@wexample.com.
 
 **Do not** open public issues for security vulnerabilities.
 
@@ -209,13 +209,13 @@ Refer to each package's documentation for specific version compatibility require
 - attrs: >=23.1.0
 - cattrs: >=23.1.0
 - requests: 
-- wexample-helpers: ==0.0.85
-- wexample-prompt: ==0.0.94
+- wexample-helpers: ==0.0.86
+- wexample-prompt: ==0.0.95
 
 
 # About us
 
-Wexample stands as a cornerstone of the digital ecosystem — a collective of seasoned engineers, researchers, and creators driven by a relentless pursuit of technological excellence. More than a media platform, it has grown into a vibrant community where innovation meets craftsmanship, and where every line of code reflects a commitment to clarity, durability, and shared intelligence.
+[Wexample](https://wexample.com) stands as a cornerstone of the digital ecosystem — a collective of seasoned engineers, researchers, and creators driven by a relentless pursuit of technological excellence. More than a media platform, it has grown into a vibrant community where innovation meets craftsmanship, and where every line of code reflects a commitment to clarity, durability, and shared intelligence.
 
 This packages suite embodies this spirit. Trusted by professionals and enthusiasts alike, it delivers a consistent, high-quality foundation for modern development — open, elegant, and battle-tested. Its reputation is built on years of collaboration, refinement, and rigorous attention to detail, making it a natural choice for those who demand both robustness and beauty in their tools.
 
