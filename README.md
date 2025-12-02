@@ -1,8 +1,47 @@
 # wexample-api
 
-Version: 0.0.80
+Version: 0.0.81
 
 Some python basic helpers for apis.
+
+## Table of Contents
+
+- [Status Compatibility](#status-compatibility)
+- [Api Reference](#api-reference)
+- [Tests](#tests)
+- [Code Quality](#code-quality)
+- [Versioning](#versioning)
+- [Changelog](#changelog)
+- [Migration Notes](#migration-notes)
+- [Roadmap](#roadmap)
+- [Security](#security)
+- [Privacy](#privacy)
+- [Support](#support)
+- [Contribution Guidelines](#contribution-guidelines)
+- [Maintainers](#maintainers)
+- [License](#license)
+- [Useful Links](#useful-links)
+- [Suite Integration](#suite-integration)
+- [Compatibility Matrix](#compatibility-matrix)
+- [Dependencies](#dependencies)
+- [Suite Signature](#suite-signature)
+
+
+## Status & Compatibility
+
+**Maturity**: Production-ready
+
+**Python Support**: >=3.10
+
+**OS Support**: Linux, macOS, Windows
+
+**Status**: Actively maintained
+
+## API Reference
+
+Full API documentation is available in the source code docstrings.
+
+Key modules and classes are documented with type hints for better IDE support.
 
 ## Tests
 
@@ -96,7 +135,7 @@ See the [project roadmap](https://github.com/wexample/python-api/issues) for upc
 
 ### Reporting Vulnerabilities
 
-If you discover a security vulnerability, please email security@wexample.com.
+If you discover a security vulnerability, please email contact@wexample.com.
 
 **Do not** open public issues for security vulnerabilities.
 
@@ -119,7 +158,7 @@ Community support is available through GitHub Discussions.
 
 ## Contribution Guidelines
 
-We welcome contributions to the Wexample suite! 
+We welcome contributions to the Wexample suite!
 
 ### How to Contribute
 
@@ -137,7 +176,9 @@ See [CONTRIBUTORS.md](CONTRIBUTORS.md) for the full list of contributors.
 
 ## License
 
-MIT
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+Free to use in both personal and commercial projects.
 
 ## Useful Links
 
@@ -157,9 +198,24 @@ The suite includes packages for configuration management, file handling, prompts
 
 Visit the [Wexample Suite documentation](https://docs.wexample.com) for the complete package ecosystem.
 
+## Compatibility Matrix
+
+This package is part of the Wexample suite and is compatible with other suite packages.
+
+Refer to each package's documentation for specific version compatibility requirements.
+
+## Dependencies
+
+- attrs: >=23.1.0
+- cattrs: >=23.1.0
+- requests: 
+- wexample-helpers: ==0.0.86
+- wexample-prompt: ==0.0.95
+
+
 # About us
 
-Wexample stands as a cornerstone of the digital ecosystem — a collective of seasoned engineers, researchers, and creators driven by a relentless pursuit of technological excellence. More than a media platform, it has grown into a vibrant community where innovation meets craftsmanship, and where every line of code reflects a commitment to clarity, durability, and shared intelligence.
+[Wexample](https://wexample.com) stands as a cornerstone of the digital ecosystem — a collective of seasoned engineers, researchers, and creators driven by a relentless pursuit of technological excellence. More than a media platform, it has grown into a vibrant community where innovation meets craftsmanship, and where every line of code reflects a commitment to clarity, durability, and shared intelligence.
 
 This packages suite embodies this spirit. Trusted by professionals and enthusiasts alike, it delivers a consistent, high-quality foundation for modern development — open, elegant, and battle-tested. Its reputation is built on years of collaboration, refinement, and rigorous attention to detail, making it a natural choice for those who demand both robustness and beauty in their tools.
 
