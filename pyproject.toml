@@ -4,7 +4,7 @@ build-backend = "pdm.backend"
 
 [project]
 name = "wexample-api"
-version = "0.0.81"
+version = "0.0.82"
 description = "Some python basic helpers for apis."
 authors = [{name = "weeger", email = "contact@wexample.com"}]
 requires-python = ">=3.10"
@@ -13,8 +13,8 @@ dependencies = [
     "attrs>=23.1.0",
     "cattrs>=23.1.0",
     "requests",
-    "wexample-helpers==0.0.86",
-    "wexample-prompt==0.0.95",
+    "wexample-helpers==0.0.87",
+    "wexample-prompt==0.0.96",
 ]
 
 [project.readme]
