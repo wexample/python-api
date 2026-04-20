@@ -1,6 +1,6 @@
 # api
 
-Version: 0.0.86
+Version: 6.0.25
 
 Some python basic helpers for apis.
 
@@ -13,6 +13,7 @@ Some python basic helpers for apis.
 - [License](#license)
 - [Suite Integration](#suite-integration)
 - [Suite Signature](#suite-signature)
+- [Introduction](#introduction)
 - [Roadmap](#roadmap)
 - [Status Compatibility](#status-compatibility)
 - [Useful Links](#useful-links)
@@ -82,8 +83,8 @@ Visit the [Wexample Suite documentation](https://docs.wexample.com) for the comp
 - attrs: >=23.1.0
 - cattrs: >=23.1.0
 - requests: 
-- wexample-helpers: >=1.0.0
-- wexample-prompt: >=1.0.0
+- wexample-helpers: >=6.7.0
+- wexample-prompt: >=2.0.0
 
 ## Versioning & Compatibility Policy
 
@@ -118,6 +119,8 @@ Visit the [Wexample Suite documentation](https://docs.wexample.com) for the comp
 This packages suite embodies this spirit. Trusted by professionals and enthusiasts alike, it delivers a consistent, high-quality foundation for modern development — open, elegant, and battle-tested. Its reputation is built on years of collaboration, refinement, and rigorous attention to detail, making it a natural choice for those who demand both robustness and beauty in their tools.
 
 Wexample cultivates a culture of mastery. Each package, each contribution carries the mark of a community that values precision, ethics, and innovation — a community proud to shape the future of digital craftsmanship.
+
+A Python toolkit for building and consuming structured APIs.
 
 ## Known Limitations & Roadmap
 
