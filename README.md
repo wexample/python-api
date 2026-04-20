@@ -1,6 +1,6 @@
 # api
 
-Version: 6.0.24
+Version: 6.0.25
 
 Some python basic helpers for apis.
 
@@ -83,7 +83,7 @@ Visit the [Wexample Suite documentation](https://docs.wexample.com) for the comp
 - attrs: >=23.1.0
 - cattrs: >=23.1.0
 - requests: 
-- wexample-helpers: >=2.0.0
+- wexample-helpers: >=6.7.0
 - wexample-prompt: >=2.0.0
 
 ## Versioning & Compatibility Policy
