@@ -13,7 +13,7 @@ dependencies = [
     "attrs>=23.1.0",
     "cattrs>=23.1.0",
     "requests",
-    "wexample-helpers>=6.7.0",
+    "wexample-helpers>=6.8.0",
     "wexample-prompt>=2.0.0",
 ]
 
