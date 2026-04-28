@@ -104,3 +104,4 @@ coverage*.lcov
 /coverage.json
 /coverage.json
 /coverage.json
+/.pdm-build/
