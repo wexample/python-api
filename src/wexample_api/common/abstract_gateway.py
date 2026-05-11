@@ -163,8 +163,37 @@ class AbstractGateway(
         stream: bool = False,
         timeout: int | None = None,
         raise_exceptions: bool = False,
+        retries: int = 0,
     ) -> requests.Response | None:
         from wexample_helpers.errors.gateway_error import GatewayError
+
+        if retries > 0:
+            from wexample_helpers.helpers.retryable_callback_manager import RetryableCallbackManager
+
+            return RetryableCallbackManager(
+                callback=lambda: self.make_request(
+                    endpoint=endpoint,
+                    method=method,
+                    data=data,
+                    query_params=query_params,
+                    headers=headers,
+                    files=files,
+                    call_origin=call_origin,
+                    expected_status_codes=expected_status_codes,
+                    fatal_if_unexpected=fatal_if_unexpected,
+                    quiet=quiet,
+                    stream=stream,
+                    timeout=timeout,
+                    raise_exceptions=True,
+                    retries=0,
+                ),
+                max_attempts=retries + 1,
+                backoff_base_seconds=3,
+                should_retry_callback=lambda exc, msg, attempt, max_a: isinstance(exc, GatewayError),
+                on_retry_callback=lambda attempt, max_a, delay, exc, msg: self.io.log(
+                    f"Request failed ({msg}), retry {attempt}/{max_a} in {delay}s…"
+                ),
+            ).run()
 
         from wexample_api.common.http_request_payload import HttpRequestPayload
         from wexample_api.enums.http import Header
