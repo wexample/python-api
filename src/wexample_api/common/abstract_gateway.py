@@ -168,7 +168,9 @@ class AbstractGateway(
         from wexample_helpers.errors.gateway_error import GatewayError
 
         if retries > 0:
-            from wexample_helpers.helpers.retryable_callback_manager import RetryableCallbackManager
+            from wexample_helpers.helpers.retryable_callback_manager import (
+                RetryableCallbackManager,
+            )
 
             return RetryableCallbackManager(
                 callback=lambda: self.make_request(
@@ -189,7 +191,9 @@ class AbstractGateway(
                 ),
                 max_attempts=retries + 1,
                 backoff_base_seconds=3,
-                should_retry_callback=lambda exc, msg, attempt, max_a: isinstance(exc, GatewayError),
+                should_retry_callback=lambda exc, msg, attempt, max_a: isinstance(
+                    exc, GatewayError
+                ),
                 on_retry_callback=lambda attempt, max_a, delay, exc, msg: self.io.log(
                     f"Request failed ({msg}), retry {attempt}/{max_a} in {delay}s…"
                 ),
