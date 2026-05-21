@@ -6,4 +6,4 @@ global:
   type: app
   version: 6.1.4
 wex:
-  version: 6.0.28
+  version: 6.0.89
