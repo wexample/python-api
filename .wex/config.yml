@@ -4,7 +4,7 @@ domains: []
 global:
   name: api
   type: app
-  version: 6.1.5
+  version: 6.1.6
 wex:
   migration: 1
   version: 6.0.90
