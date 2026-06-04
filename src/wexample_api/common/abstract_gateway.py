@@ -225,12 +225,6 @@ class AbstractGateway(
             content_type = ContentType.MULTIPART.value
             payload.headers.pop(Header.CONTENT_TYPE.value, None)
 
-        if payload.data is not None:
-            if isinstance(payload.data, bytes):
-                self.io.log(f"Sending binary payload ({len(payload.data)} bytes)")
-            else:
-                self.io.log(f"Sending {type(payload.data).__name__} payload")
-
         request_kwargs: dict[str, Any] = {
             "method": payload.method.value,
             "url": payload.url,
