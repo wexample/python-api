@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import time
 from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any
@@ -328,6 +329,10 @@ class AbstractGateway(
         except (ValueError, AttributeError):
             if response.text:
                 message = response.text
+        # GitLab returns a nested dict (e.g. validation errors) under "message";
+        # keep the full content but as a string so it can flow through exceptions.
+        if not isinstance(message, str):
+            message = json.dumps(message, default=str)
         return message
 
     def _get_header_value(
