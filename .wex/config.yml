@@ -4,16 +4,7 @@ domains: []
 global:
   name: api
   type: app
-  version: 6.3.3
-test:
-  coverage:
-    last_report:
-      commit_hash: 2f554ca30e9e36b164c33abe954abec4808edaa8
-      covered: 157
-      excluded: 5
-      missing: 71
-      percent: 68.85964912280701
-      total: 228
+  version: 6.3.4
 wex:
   migration: 1
   version: 6.0.112
