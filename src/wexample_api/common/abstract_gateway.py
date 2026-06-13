@@ -238,11 +238,11 @@ class AbstractGateway(
         if files:
             request_kwargs["data"] = data or {}
             request_kwargs["files"] = files
-        elif content_type in (
+        elif content_type in {
             ContentType.FORM_URLENCODED.value,
             ContentType.OCTET_STREAM.value,
             ContentType.TEXT.value,
-        ):
+        }:
             request_kwargs["data"] = data
         else:
             request_kwargs["json"] = data
