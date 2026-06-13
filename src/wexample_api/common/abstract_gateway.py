@@ -348,8 +348,9 @@ class AbstractGateway(
         """
         if not headers:
             return None
+        target = name.value.lower()
         raw = next(
-            (v for k, v in headers.items() if k.lower() == name.value.lower()),
+            (v for k, v in headers.items() if k.lower() == target),
             None,
         )
         if raw is None:
