@@ -16,6 +16,14 @@ from wexample_prompt.mixins.with_io_manager import WithIoManager
 
 from wexample_api.enums.http import ContentType, HttpMethod
 
+_RAW_BODY_CONTENT_TYPES = frozenset(
+    {
+        ContentType.FORM_URLENCODED.value,
+        ContentType.OCTET_STREAM.value,
+        ContentType.TEXT.value,
+    }
+)
+
 if TYPE_CHECKING:
     from collections.abc import Mapping
 
@@ -238,11 +246,7 @@ class AbstractGateway(
         if files:
             request_kwargs["data"] = data or {}
             request_kwargs["files"] = files
-        elif content_type in {
-            ContentType.FORM_URLENCODED.value,
-            ContentType.OCTET_STREAM.value,
-            ContentType.TEXT.value,
-        }:
+        elif content_type in _RAW_BODY_CONTENT_TYPES:
             request_kwargs["data"] = data
         else:
             request_kwargs["json"] = data
