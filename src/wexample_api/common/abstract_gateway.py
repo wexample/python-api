@@ -363,8 +363,10 @@ class AbstractGateway(
         return raw.split(";", 1)[0].strip().lower() or None
 
     def _handle_rate_limiting(self) -> None:
+        now = time.time()
         if self.last_request_time is not None:
-            elapsed = time.time() - self.last_request_time
+            elapsed = now - self.last_request_time
             if elapsed < self.rate_limit_delay:
                 time.sleep(self.rate_limit_delay - elapsed)
-        self.last_request_time = time.time()
+                now = time.time()
+        self.last_request_time = now

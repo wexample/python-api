@@ -2,10 +2,10 @@
   "engram_version": 1,
   "source_key": "src/wexample_api/common/abstract_gateway.py",
   "cache_nonce": "1c2800147ebc4367950bb7b61bd21d00",
-  "last_visited_at": "2026-06-14T09:39:43+00:00",
-  "last_rev": "29213045f68001d08b69c998be334f78ba71feb0",
+  "last_visited_at": "2026-06-14T09:46:37+00:00",
+  "last_rev": "8eedcef59b00d79094839ecc9a753be7015175ee",
   "last_decision": null,
   "kinds": [],
-  "notes": "Visited via ai::agent/query (session 2026-06-14T11-39-17).",
+  "notes": "Visited via ai::agent/query (session 2026-06-14T11-45-59).",
   "in_progress": null
 }
