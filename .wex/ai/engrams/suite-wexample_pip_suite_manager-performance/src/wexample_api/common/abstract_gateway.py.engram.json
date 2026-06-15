@@ -2,10 +2,10 @@
   "engram_version": 1,
   "source_key": "src/wexample_api/common/abstract_gateway.py",
   "cache_nonce": "1c2800147ebc4367950bb7b61bd21d00",
-  "last_visited_at": "2026-06-14T09:46:37+00:00",
-  "last_rev": "8eedcef59b00d79094839ecc9a753be7015175ee",
-  "last_decision": null,
+  "last_visited_at": "2026-06-15T18:54:22+00:00",
+  "last_rev": "cafa54a6006bc87f509fbf65cd7a783d54faf5b3",
+  "last_decision": "edit",
   "kinds": [],
-  "notes": "Visited via ai::agent/query (session 2026-06-14T11-45-59).",
+  "notes": "removed duplicate Mapping re-import under TYPE_CHECKING and dead `and exception` guard in make_request",
   "in_progress": null
 }

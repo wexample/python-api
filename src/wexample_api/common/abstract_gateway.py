@@ -17,8 +17,6 @@ from wexample_prompt.mixins.with_io_manager import WithIoManager
 from wexample_api.enums.http import ContentType, HttpMethod
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping
-
     from wexample_helpers.const.types import StringsList
 
     from wexample_api.common.http_request_payload import HttpRequestPayload
@@ -281,7 +279,7 @@ class AbstractGateway(
                 exception.response = (
                     response  # Attach response to exception for debugging
                 )
-                if raise_exceptions and exception:
+                if raise_exceptions:
                     raise exception
 
         return self.handle_api_response(
