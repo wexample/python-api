@@ -16,14 +16,6 @@ from wexample_prompt.mixins.with_io_manager import WithIoManager
 
 from wexample_api.enums.http import ContentType, HttpMethod
 
-_RAW_BODY_CONTENT_TYPES = frozenset(
-    {
-        ContentType.FORM_URLENCODED.value,
-        ContentType.OCTET_STREAM.value,
-        ContentType.TEXT.value,
-    }
-)
-
 if TYPE_CHECKING:
     from collections.abc import Mapping
 
@@ -31,6 +23,14 @@ if TYPE_CHECKING:
 
     from wexample_api.common.http_request_payload import HttpRequestPayload
     from wexample_api.enums.http import Header
+
+_RAW_BODY_CONTENT_TYPES = frozenset(
+    {
+        ContentType.FORM_URLENCODED.value,
+        ContentType.OCTET_STREAM.value,
+        ContentType.TEXT.value,
+    }
+)
 
 
 @base_class
