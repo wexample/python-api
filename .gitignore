@@ -43,8 +43,8 @@ Desktop.ini
 *.log
 logs/
 log/
-.cache/
-cache/
+/.cache/
+/cache/
 tmp/
 temp/
 build/
