@@ -172,7 +172,7 @@ class AbstractGateway(
         raise_exceptions: bool = False,
         retries: int = 0,
     ) -> requests.Response | None:
-        from wexample_helpers.errors.gateway_error import GatewayError
+        from wexample_helpers.error.gateway_error import GatewayError
 
         if retries > 0:
             from wexample_helpers.helpers.retryable_callback_manager import (
