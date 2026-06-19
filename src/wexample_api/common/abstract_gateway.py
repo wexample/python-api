@@ -300,7 +300,7 @@ class AbstractGateway(
         self, request_context: HttpRequestPayload, status_code: int | None = None
     ) -> dict[str, Any]:
         """Create request details dictionary for logging."""
-        from wexample_helpers.helpers.cli import cli_make_clickable_path
+        from wexample_helpers.helper.cli import cli_make_clickable_path
 
         details: dict[str, Any] = {
             "URL": request_context.url,
