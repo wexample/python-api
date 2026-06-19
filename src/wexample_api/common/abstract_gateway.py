@@ -12,7 +12,7 @@ from wexample_helpers.classes.mixin.has_snake_short_class_name_class_mixin impor
 )
 from wexample_helpers.classes.mixin.has_two_steps_init import HasTwoStepInit
 from wexample_helpers.decorator.base_class import base_class
-from wexample_prompt.mixins.with_io_manager import WithIoManager
+from wexample_prompt.mixin.with_io_manager import WithIoManager
 
 from wexample_api.enums.http import ContentType, HttpMethod
 
