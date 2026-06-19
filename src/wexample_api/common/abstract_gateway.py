@@ -175,7 +175,7 @@ class AbstractGateway(
         from wexample_helpers.error.gateway_error import GatewayError
 
         if retries > 0:
-            from wexample_helpers.helpers.retryable_callback_manager import (
+            from wexample_helpers.helper.retryable_callback_manager import (
                 RetryableCallbackManager,
             )
 
